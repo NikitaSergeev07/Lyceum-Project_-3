@@ -170,7 +170,7 @@ def news_delete(id):
         db_sess.commit()
     else:
         abort(404)
-    return redirect('/')
+    return redirect('/account')
 
 if __name__ == '__main__':
     # if isinstance('12', str) == True:
