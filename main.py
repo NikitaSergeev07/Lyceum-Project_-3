@@ -172,6 +172,24 @@ def news_delete(id):
         abort(404)
     return redirect('/account')
 
+
+@app.route('/api')
+def api():
+    return render_template('Api.html')
+
+
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+
+@app.route('/donate')
+def donate():
+    return render_template('donate.html')
+
+
+
 if __name__ == '__main__':
     # if isinstance('12', str) == True:
     main()
