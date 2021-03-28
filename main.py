@@ -1,7 +1,8 @@
-from flask import Flask, make_response
+from flask import Flask
 from data import db_session
 from data.users import User
 from data.object import News
+from data.contact_forms import Contact_form
 from flask import render_template, redirect, request, flash, url_for
 from forms.user import RegisterForm
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -79,10 +80,18 @@ def search():
 def contact():
     if request.method == 'GET':
         return render_template('contact.html')
-    elif request.method == 'POST':
-        # print(request.form['username'])
+    if request.method == 'POST':
         if len(request.form['username']) > 2:
             flash('Сообщение отправлено', category='success')
+            if request.form['username'] and request.form['email'] and request.form['message']:
+                db_sess = db_session.create_session()
+                contact = Contact_form(
+                    username=request.form['username'],
+                    email=request.form['email'],
+                    message=request.form['message']
+                )
+                db_sess.add(contact)
+                db_sess.commit()
         else:
             flash("Ошибка отправки", category='error')
     return render_template('contact.html')
