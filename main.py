@@ -71,13 +71,10 @@ def index():
 def search():
     if request.method == 'POST':
         db_sess = db_session.create_session()
-        result = db_sess.query(News).filter(News.title.like('%a%'))
-        print(result)
-        print(request.form['category'])
-        print(request.form['mess'])
-        print(request.form['city'])
-        return render_template('search.html')
-    return render_template('search.html')
+        mess = request.form['mess']
+        result = db_sess.query(News).filter(News.title.like(f'%{mess}%'))
+        return render_template('search.html', news=result)
+
 
 
 
