@@ -1,16 +1,17 @@
-from flask import Flask
-from flask import render_template, redirect, request, flash
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_restful import abort, Api
-from werkzeug.exceptions import abort
+from flask import Flask, make_response, jsonify
 
 from data import db_session
-from data.contact_forms import Contact_form
-from data.object import Objects
 from data.users import User
-from forms.object import ObjectForm
-from forms.user import LoginForm
+from data.object import Objects
+from data.contact_forms import Contact_form
+from flask import render_template, redirect, request, flash, url_for
 from forms.user import RegisterForm
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_restful import reqparse, abort, Api, Resource
+from forms.user import LoginForm
+from werkzeug.exceptions import abort
+
+from forms.object import ObjectForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -105,6 +106,12 @@ def contact():
     return render_template('contact.html')
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    return redirect("/account")
+
+
 @app.route('/account')
 @login_required
 def account():
@@ -116,6 +123,10 @@ def account():
         objects = db_sess.query(Objects)
     return render_template("account.html", objects=objects)
 
+
+@app.route('/event')
+def event():
+    return render_template('event.html')
 
 @app.route('/log_out')
 @login_required
