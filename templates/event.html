@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>барахолка.рф</title>
-
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
 </head>
 
 <body>
+{% extends "base.html" %}
+
+{% block content %}
+
+
 
      <!-- Left Column / Headphones Image --></pre>
-<div class="left-column"><img src="images/black.png" alt="" data-image="black" /> <img src="images/blue.png" alt="" data-image="blue" /> <img class="active" src="images/red.png" alt="" data-image="red" /></div>
+<div class="left-column"><img src="../static/img/logo.jpg" alt="" data-image="black" /> <img src="../static/img/logo.jpg" alt="" data-image="blue" /> <img class="active" src="../static/img/logo.jpg" alt="" data-image="red" /></div>
 <pre>
 
   <!-- Right Column --></pre>
@@ -251,6 +259,7 @@ html, body {
   }
 }
     </style>
+{% endblock %}
 </body>
 
 </html>
